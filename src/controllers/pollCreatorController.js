@@ -24,7 +24,6 @@ export async function postChoice(req, res){
     try{
         const poll = await db.collection('polls').findOne({_id: new ObjectId(choice.poolId)})
         const alreadyExist = await db.collection('choices').findOne({title: choice.title})
-        console.log(poll.title, choice.title)
         if(dayjs(poll.expireAt).valueOf()-dayjs(Date.now()) < 0){
             return res.sendStatus(403)
         }
